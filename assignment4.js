@@ -1,26 +1,3 @@
-window.addEventListener("load", setUpPage, false);
-let formFields = [];
-
-
-function setUpPage() {
-    createInputFieldsEventListener();
-    //validateInputFields();
-    createRegisterAccountEventListener();
-    createClearFormEventListener();
-    setUpFormData();
-}
-
-function setUpFormData() {
-    var inputs = document.querySelectorAll("#registerForm input");
-    inputs.forEach(element => {
-        formFields[element.id] = {
-            value: element.value,
-            valid: false
-        };
-    });
-    //console.log(formFields);
-}
-
 function validateInputFields() {
     let form = document.getElementById("form");
     let firstname = document.getElementById("firstname");
@@ -45,6 +22,12 @@ function validateInputFields() {
     let cityValue = city.value.trim();
     let ageValue = age.value.trim();
 
+
+    emailValidation(emailValue);
+    proviceValidation(provinceValue);
+    postalcodeValidation(postalcodeValue);
+    passwordValidation(passwordValue, password2Value);
+    ageValidation(ageValue);
 
     if (firstnameValue === "") {
         setErrorFor(firstname, "firstname cannot be blank");
@@ -77,14 +60,6 @@ function validateInputFields() {
         formFields[city.id].valid = true;
         setSuccessFor(city);
     }
-
-    emailValidation(emailValue);
-    proviceValidation(provinceValue);
-    postalcodeValidation(postalcodeValue);
-    passwordValidation(passwordValue, password2Value);
-    ageValidation(ageValue);
-
-    // console.log("after validation", formFields);
 }
 
 
@@ -186,7 +161,6 @@ function setSuccessFor(input) {
 function validateEmail(emailValue) {
     var regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
     var isEmail = regEx.test(emailValue);
-    // console.log(isEmail ? "It's an email" : "Not an email");
     return isEmail;
 }
 
@@ -229,10 +203,10 @@ function registerAccount() {
     var validationResult = document.getElementById("validationResult");
     var isFormValid = validateForm();
     if (!isFormValid) {
-        validationResult.innerHTML = "Your order can not be submitted. Please check the validation result.";
+        validationResult.innerHTML = "Validation Error. Please check.";
         successResult.innerHTML = "";
     } else {
-        successResult.innerHTML = "Congratulations! Your order is successfully submitted!";
+        successResult.innerHTML = "Your account is successfully submitted! Congratulations!";
         validationResult.innerHTML = "";
     }
 }
@@ -282,6 +256,27 @@ function clearForm() {
     return false;
 }
 
+window.addEventListener("load", setUpPage, false);
+let formFields = [];
+
+
+function setUpPage() {
+    createInputFieldsEventListener();
+    //validateInputFields();
+    createRegisterAccountEventListener();
+    createClearFormEventListener();
+    setUpFormData();
+}
+
+function setUpFormData() {
+    var inputs = document.querySelectorAll("#registerForm input");
+    inputs.forEach(element => {
+        formFields[element.id] = {
+            value: element.value,
+            valid: false
+        };
+    });
+}
 
 
 
