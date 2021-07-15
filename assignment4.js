@@ -7,6 +7,7 @@ function setUpPage() {
     //validateInputFields();
     createRegisterAccountEventListener();
     createClearFormEventListener();
+    //setValidationResult();
     setUpFormData();
 }
 
@@ -231,9 +232,13 @@ function registerAccount() {
     if (!isFormValid) {
         validationResult.innerHTML = "Your order can not be submitted. Please check the validation result.";
         successResult.innerHTML = "";
+        validationResult.style.visibility = "visible";
+        successResult.style.visibility = "hidden";
     } else {
         successResult.innerHTML = "Congratulations! Your order is successfully submitted!";
         validationResult.innerHTML = "";
+        validationResult.style.visibility = "hidden";
+        successResult.style.visibility = "visible";
     }
 }
 
@@ -270,15 +275,20 @@ function createInputFieldsEventListener() {
 
 function clearForm() {
     var registerForm = document.getElementById("registerForm");
+
     if (registerForm != null) {
         confirm("Are you sure to clear the form?");
         successResult.innerHTML = "";
         validationResult.innerHTML = "";
+        validationResult.style.visibility = "hidden";
+        successResult.style.visibility = "hidden";
 
         registerForm.reset();
-
+        var fromControls = document.querySelectorAll(".form-control");
+        fromControls.forEach(formControl => {
+            formControl.className = "form-control";
+        });
     }
-    // preventDefault();
     return false;
 }
 
