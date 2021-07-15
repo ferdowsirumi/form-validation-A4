@@ -1,13 +1,15 @@
+// author: Ferdowsi Rumi 301168815
+// assignment 4: Form validation
+
 window.addEventListener("load", setUpPage, false);
+
 let formFields = [];
 
 
 function setUpPage() {
     createInputFieldsEventListener();
-    //validateInputFields();
     createRegisterAccountEventListener();
     createClearFormEventListener();
-    //setValidationResult();
     setUpFormData();
 }
 
@@ -284,6 +286,7 @@ function clearForm() {
         successResult.style.visibility = "hidden";
 
         registerForm.reset();
+
         var fromControls = document.querySelectorAll(".form-control");
         fromControls.forEach(formControl => {
             formControl.className = "form-control";
