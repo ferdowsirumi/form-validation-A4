@@ -1,47 +1,39 @@
 
 
-
-
-
-
-const form = document.getElementById("form");
-const firstname = document.getElementById("firstname");
-const lastname = document.getElementById("lastname");
-const password = document.getElementById("password");
-const password2 = document.getElementById("password2");
-const province = document.getElementById("province");
-const postalcode = document.getElementById("postalcode");
-const email = document.getElementById("email");
-const address = document.getElementById("address");
-const city = document.getElementById("city");
-const age = document.getElementById("age");
-
-
-//var validatedSuccessfully = true;
-
+window.addEventListener("load", setUpPage, false);
 
 function setUpPage() {
+    createInputFieldsEventListener();
     checkInputs();
-    createSubmitOrderEventListener();
+    createRegisterAccountEventListener();
+    createClearFormEventListener();
 }
-var inputs = document.querySelectorAll("input");
-inputs.forEach(element => {
-    element.addEventListener("blur", checkInputs, false);
-    element.addEventListener('input', checkInputs, false);
-});
+
 
 function checkInputs() {
     console.log("checkInput called");
-    const firstnameValue = firstname.value.trim();
-    const lastnameValue = lastname.value.trim();
-    const passwordValue = password.value.trim();
-    const password2Value = password2.value.trim();
-    const provinceValue = province.value.trim();
-    const postalcodeValue = postalcode.value.trim();
-    const emailValue = email.value.trim();
-    const addressValue = address.value.trim();
-    const cityValue = city.value.trim();
-    const ageValue = age.value.trim();
+    let form = document.getElementById("form");
+    let firstname = document.getElementById("firstname");
+    let lastname = document.getElementById("lastname");
+    let password = document.getElementById("password");
+    let password2 = document.getElementById("password2");
+    let province = document.getElementById("province");
+    let postalcode = document.getElementById("postalcode");
+    let email = document.getElementById("email");
+    let address = document.getElementById("address");
+    let city = document.getElementById("city");
+    let age = document.getElementById("age");
+
+    let firstnameValue = firstname.value.trim();
+    let lastnameValue = lastname.value.trim();
+    let passwordValue = password.value.trim();
+    let password2Value = password2.value.trim();
+    let provinceValue = province.value.trim();
+    let postalcodeValue = postalcode.value.trim();
+    let emailValue = email.value.trim();
+    let addressValue = address.value.trim();
+    let cityValue = city.value.trim();
+    let ageValue = age.value.trim();
 
 
     if (firstnameValue === "") {
@@ -151,7 +143,6 @@ function ageValidation(ageValue) {
     }
     else {
         setSuccessFor(age);
-
     }
 }
 
@@ -209,17 +200,55 @@ function submitOrder(firstnameValue, lastnameValue, passwordValue, password2Valu
     }
 }
 
-function createSubmitOrderEventListener() {
-    var placeOrder = document.getElementById("placeOrder");
-    if (placeOrder.addEventListener) {
-        placeOrder.addEventListener("click", submitOrder, false);
+function createRegisterAccountEventListener() {
+    var btnRegisterAccount = document.getElementById("btnRegisterAccount");
+    if (btnRegisterAccount.addEventListener) {
+        btnRegisterAccount.addEventListener("click", submitOrder, false);
     }
-    else if (placeOrder.attachEvent) {
-        placeOrder.attachEvent("onclick", submitOrder);
+    else if (btnRegisterAccount.attachEvent) {
+        btnRegisterAccount.attachEvent("onclick", submitOrder);
+    }
+}
+function createClearFormEventListener() {
+    var btnClear = document.getElementById("btnClear");
+    if (btnClear.addEventListener) {
+        btnClear.addEventListener("click", clearForm, false);
+    }
+    else if (btnClear.attachEvent) {
+        btnClear.attachEvent("onclick", clearForm);
     }
 }
 
-window.addEventListener("load", setUpPage, false);
+function createInputFieldsEventListener() {
+    var inputs = document.querySelectorAll("input");
+    inputs.forEach(element => {
+
+        if (element.addEventListener) {
+            element.addEventListener("blur", checkInputs, false);
+            element.addEventListener('input', checkInputs, false);
+        }
+        else if (element.attachEvent) {
+            element.attachEvent("blur", checkInputs);
+            element.attachEvent('input', checkInputs);
+        }
+
+    });
+}
+
+function clearForm() {
+    var registerForm = document.getElementById("registerForm");
+
+    if (registerForm != null) {
+        confirm("Are you sure to clear the form?");
+
+        registerForm.reset();
+    }
+   // preventDefault();
+    return false;
+}
+
+
+
 
 // <!-- // ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$ : Email-->
 // <!-- ^[A-Z]\d[A-Z]\d[A-Z]\d$ : postalCode -->

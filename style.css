@@ -558,7 +558,19 @@ body {
   padding: 10px;
   width: 100%;
 }
+.submission {
+  margin-top: 50px;
+  text-align: center;
+  display: block;
+}
 
+.submission > div {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 200px;
+  display: inline-block;
+
+}
 ::placeholder {
   font-size: 11px;
   color: dimgrey;
