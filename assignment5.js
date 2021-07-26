@@ -1,18 +1,41 @@
 // author: Ferdowsi Rumi 301168815
-// assignment 4: Form validation
+// assignment 5: Bug Smasher
 
 window.addEventListener("load", setUpPage, false);
 
-let formFields = [];
-
 
 function setUpPage() {
-    createInputFieldsEventListener();
-    createRegisterAccountEventListener();
-    createClearFormEventListener();
-    setUpFormData();
+    // createInputFieldsEventListener();
+    // createRegisterAccountEventListener();
+    // createClearFormEventListener();
+    // setUpFormData();
+    moveBugByInterval();
 }
 
+function moveBugByInterval() {
+    // let date = new Date();
+    // let time = date.toLocaleTimeString();
+  var divBug =  document.getElementById('divBug');
+    
+    divBug.style.left = Math.floor((Math.random() * 100) + 1).toString() + "%";;
+    divBug.style.top = Math.floor((Math.random() * 100) + 1).toString() + "%";
+    console.log("bug displaced:", divBug.style.top);
+
+    //.textContent = time;
+ }
+
+//  function getRandomPosition() {
+//     var x = document.getElementById("demo")
+//     x.innerHTML = Math.floor((Math.random() * 100) + 1);
+//   }
+ 
+ const createClock = setInterval(moveBugByInterval, 1000);
+
+
+
+
+
+let formFields = [];
 function setUpFormData() {
     var inputs = document.querySelectorAll("#registerForm input");
     inputs.forEach(element => {
